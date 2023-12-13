@@ -1,0 +1,146 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" (click)="openModal()">
+  <i class="bi bi-plus-circle-fill"></i>
+Ajouter un nouveau livre</button>
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: display }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="color: yellow;">Ajouter un livre</h4>
+        <button
+          type="button"
+          class="btn btn-default"
+          arialabel="
+  Close"
+          (click)="closeModal()"
+        >
+          <span
+            ariahidden="
+  true"
+            >&times;</span
+          >
+        </button>
+      </div>
+      <div class="modal-body">
+        <template *ngTemplateOutlet="formProduct"></template>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="closeModal()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Form -->
+<!-- Form --><!-- Form -->
+<ng-template #formProduct>
+  <form (ngSubmit)="ajoutliver()" #livreForm="ngForm">
+    <div class="mb-3">
+      <label for="prix" class="form-label">Prix</label>
+      <input
+        type="number"
+        class="form-control"
+        id="prix"
+        name="prix"
+        placeholder="Prix"
+        [(ngModel)]="livres.prix"
+        required
+      />
+      <div *ngIf="livreForm.controls['prix'].invalid && livreForm.controls['prix'].touched">
+        <small class="text-danger">Le prix est requis.</small>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="annedition" class="form-label">Edition</label>
+      <input
+        type="number"
+        class="form-control"
+        id="annedition"
+        name="annedition"
+        placeholder="Edition"
+        [(ngModel)]="livres.annedition"
+        required
+      />
+      <div *ngIf="livreForm.controls['annedition'].invalid && livreForm.controls['annedition'].touched">
+        <small class="text-danger">L'édition est requise.</small>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="qtestock" class="form-label">Quantité</label>
+      <input
+        type="number"
+        class="form-control"
+        id="qtestock"
+        name="qtestock"
+        placeholder="Quantité"
+        [(ngModel)]="livres.qtestock"
+        required
+      />
+      <div *ngIf="livreForm.controls['qtestock'].invalid && livreForm.controls['qtestock'].touched">
+        <small class="text-danger">La quantité est requise.</small>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="titre" class="form-label">Titre</label>
+      <input
+        type="text"
+        class="form-control"
+        id="titre"
+        name="titre"
+        placeholder="Titre"
+        [(ngModel)]="livres.titre"
+        required
+      />
+      <div *ngIf="livreForm.controls['titre'].invalid && livreForm.controls['titre'].touched">
+        <small class="text-danger">Le titre est requis.</small>
+      </div>
+    </div>
+    <file-pond #myPond [options]="pondOptions"></file-pond>
+
+    <div class="mb-3">
+      <label for="auteursId" class="form-label">Auteur</label>
+      <select name="auteursId" class="form-control" [(ngModel)]="livres.auteurs" required>
+        <option *ngFor="let auteur of auteurs" [value]="auteur._id">{{ auteur.nomauteur }}</option>
+      </select>
+    </div>
+    
+      <div *ngIf="livreForm.controls['auteursId'].invalid && livreForm.controls['auteursId'].touched">
+        <small class="text-danger">L'auteur est requis.</small>
+      </div>
+    
+    <div class="mb-3">
+      <label for="editeurId" class="form-label">Editeur</label>
+      <select name="editeurId" class="form-control" [(ngModel)]="livres.maised" required>
+        <option *ngFor="let editeur of maised" [value]="editeur._id">{{ editeur.maisonedit }}</option>
+      </select>
+    </div>
+    
+      <div *ngIf="livreForm.controls['editeurId'].invalid && livreForm.controls['editeurId'].touched">
+        <small class="text-danger">L'éditeur est requis.</small>
+      </div>
+    
+    <div class="mb-3">
+      <label for="speId" class="form-label">Specialité</label>
+      <select
+        name="speId"
+        class="form-control"
+        [(ngModel)]="livres.specialite"
+        required
+      >
+        <option *ngFor="let sd of specialites" [value]="sd._id">
+          {{ sd.nomspecialite }}
+        </option>
+      </select>
+      <div *ngIf="livreForm.controls['speId'].invalid && livreForm.controls['speId'].touched">
+        <small class="text-danger">La spécialité est requise.</small>
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-success" [disabled]="livreForm.invalid">
+        Enregistrer
+      </button>
+    </div>
+  </form>
+</ng-template>

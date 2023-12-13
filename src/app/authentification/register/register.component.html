@@ -1,0 +1,19 @@
+<form (ngSubmit)="Ajoutuser()" >
+    <div class="mb-3">
+        <input type="text" class="form-control" id="nom" name = "nom"
+        placeholder="nom" [(ngModel)]="user.nom" >
+        </div>
+    <div class="mb-3">
+    <input type="text" class="form-control" id="email" name = "email"
+    placeholder="email" [(ngModel)]="user.email" >
+    </div>
+    <div class="mb-3">
+    <input type="text" class="form-control" id="password" name =
+    "password" placeholder="password" [(ngModel)]="user.password" >
+    </div>
+    
+    
+    <div>
+    <button type="submit" class="btn btn-success">Enregistrer</button>
+    </div>
+    </form>

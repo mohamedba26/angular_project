@@ -1,0 +1,75 @@
+<!-- Button trigger modal -->
+<button class="btn btn-default" (click)="openModal()">
+    <i class="bi bi-pencil-square" style="color: blue"></i>
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ 'display': display }">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Modification d'un livre</h4>
+          <button type="button" class="btn btn-default" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <template *ngTemplateOutlet="formLivre"></template>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="closeModal()">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Form -->
+  <ng-template #formLivre>
+    <form (ngSubmit)="update()">
+      <div class="mb-3">
+        <label for="isbn">ISBN</label>
+        <input type="text" class="form-control" id="isbn" name="isbn" placeholder="isbn *"  [(ngModel)]="livre.isbn">
+      </div>
+      <div class="mb-3">
+        <label for="titre">Titre</label>
+        <input type="text" class="form-control" id="titre" name="titre" placeholder="titre *" [(ngModel)]="livre.titre">
+      </div>
+      <div class="mb-3">
+        <label for="annedition">Année d'édition</label>
+        <input type="number" class="form-control" id="annedition" name="annedition *" placeholder="Année d'édition" [(ngModel)]="livre.annedition">
+      </div>
+      <div class="mb-3">
+        <label for="prix">Prix</label>
+        <input type="number" class="form-control" id="prix" name="prix" placeholder="prix *" [(ngModel)]="livre.prix">
+      </div>
+      <div class="mb-3">
+        <label for="qtestock">Quantité en stock</label>
+        <input type="number" class="form-control" id="qtestock" name="qtestock" placeholder="qtestock *" [(ngModel)]="livre.qtestock">
+      </div>
+      <div class="mb-3">
+        <label for="auteursId">Auteur</label>
+        <select name="auteursId" class="form-control" [(ngModel)]="livre.auteursId" required>
+          <option *ngFor="let auteur of auteurs" [value]="auteur._id">{{ auteur.nomauteur }}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="editeurId">Editeur</label>
+        <select name="editeurId" class="form-control" [(ngModel)]="livre.editeurId" required>
+          <option *ngFor="let editeur of maised" [value]="editeur._id">{{ editeur.maisonedit }}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="speId">Spécialité</label>
+        <select name="speId" class="form-control" [(ngModel)]="livre.speId" required>
+          <option *ngFor="let specialite of specialites" [value]="specialite._id">{{ specialite.nomspecialite }}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <file-pond [options]="pondOptions" [files]="pondFiles"></file-pond>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-success">Enregistrer</button>
+      </div>
+    </form>
+  </ng-template>
+  

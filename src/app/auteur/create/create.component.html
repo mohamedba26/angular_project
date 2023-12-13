@@ -1,0 +1,71 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" (click)="openModal()">
+  <i class="bi bi-plus-circle-fill"></i>
+Ajouter un auteur</button>
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: display }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="color: yellow;">Ajouter un  auteur</h4>
+        <button
+          type="button"
+          class="btn btn-default"
+          arialabel="Close"
+          (click)="closeModal()"
+        >
+          <span ariahidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <template *ngTemplateOutlet="categorieform"></template>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="closeModal()">
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Form -->
+<ng-template #categorieform>
+  <form (ngSubmit)="create()">
+    <div class="mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="nom"
+        name="nom"
+        placeholder="Nom de l'auteur"
+        [(ngModel)]="auteur.nomauteur"
+      />
+      <br />
+
+      <input
+        type="text"
+        class="form-control"
+        id="nom"
+        name="email"
+        placeholder="Email de l'auteur"
+        [(ngModel)]="auteur.email"
+      />
+      <br />
+      <input
+        type="text"
+        class="form-control"
+        id="nom"
+        name="numero"
+        placeholder="Numero de l'auteur"
+        [(ngModel)]="auteur.numtel"
+      />
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-success" (clic)="create()">
+        Enregistrer
+      </button>
+    </div>
+  </form>
+</ng-template>
